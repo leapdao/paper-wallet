@@ -4,7 +4,7 @@ const exec = util.promisify(require('child_process').exec);
 var merge = require('easy-pdf-merge');
 var fs = require('fs')
 
-const HOWMANY = 5
+const HOWMANY = 50
 
 
 

@@ -4,11 +4,11 @@ const asyncStickers = util.promisify(generateStickersHTML);
 var merge = require('easy-pdf-merge');
 var fs = require('fs');
 
-const URL = "https://planeta.leap.rocks";
-const HOWMANY = 200;
-const PATH = 'wallets-ebt';
-const BATCH = 'pa1';
-const SAVE_PK = true;
+const URL = "https://volt.deora.earth";
+const HOWMANY = 700;
+const PATH = 'wallets-deora';
+const BATCH = '0';
+const SAVE_PK = false;
 const workDir = process.cwd();
 const positions = { 
     x:[50, 200, 350], //absolute X and Y positions for sticker elemnts on page

@@ -14,7 +14,8 @@ const CONFIG = {
     priv: process.env.SENDING_PK,
     address: "0x"+ethereumjsutil.privateToAddress(process.env.SENDING_PK).toString('hex') 
   },
-  tokenColor: parseInt(process.env.COLOR) || NST_COLOR_BASE, //49155 - USB, 49156 - USA, 49160-65 - PA1-6
+  startIndex: process.env.START_INDEX || 0,
+  tokenColor: parseInt(process.env.COLOR) || NST_COLOR_BASE, //49155 - USB, 49156 - USA, 49160-65 - PA1-6, 49159 - VBC
   queenUtxoNum: parseInt(process.env.QUEEN_UTXO) || 0,
   //queenId: '0xcbb18d83c09c99d8cfb5f0fad6febfb0d9a41fac9b165399982e43528e7c69db', //USB
   //queenId: '0xa1f5da38474f60e5684a1e511e4668ff4f121c1bf4272cc129155fd2b88171a3',  //USA
@@ -23,11 +24,12 @@ const CONFIG = {
   //queenId: '0x4b76a985c779230d3ebc28ddb825677428816d3aa0c8173056326488130fcafd', //PA3
   //queenId: '0x8b549686f1c520a969ac1aca76231cc96e6d7c1eee43c86b3c6a1e30223019ea', //PA4
   //queenId: '0xa67c2236d8c9b88e8ff06197726eb62304bad3aba1e3dfaf5facd78810f2ef64', //PA5
-  queenId: '0x3516e6f1eca6e64e5d99315d9782953b2feeb50e0d1915ae4d10f44c8b03537f', //PA6
+  //queenId: '0x3516e6f1eca6e64e5d99315d9782953b2feeb50e0d1915ae4d10f44c8b03537f', //PA6
+  queenId: '0x9303a93185a0c10b0af01cbd65ed082f73467c3c7e62fadd9ec745238a23dc4c', //VBC
   initData: "0x0000000000000000000000000000000000000000000000000000000000000000"
 };
-const folder = 'wallets-ebt';
-const batch = 'pa6';
+const folder = 'wallets-deora';
+const batch = '0';
 
 
 //use this to debug CONFIG
@@ -63,7 +65,7 @@ async function main() {
   }
 
   
-  for(let i = 0; i < accounts.length; i++) {
+  for(let i = CONFIG.startIndex; i < accounts.length; i++) {
     console.log(i, 'Breeding and sending NFT to', accounts[i]);
     utxos = await getUtxos(accounts[i], CONFIG.tokenColor, dispenserWallet.provider);
     if (utxos.length > 0) {

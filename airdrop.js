@@ -13,12 +13,13 @@ const CONFIG = {
     priv: process.env.SENDING_PK,
     address: "0x"+ethereumjsutil.privateToAddress(process.env.SENDING_PK).toString('hex') 
   },
-  tokenColor: 3,
-  amountToSend: '3000000000000000000',
-  topUp: false //use this for adding funds to already funded wallets (account will not be checked if it has funds or not)
+  tokenColor: 5,
+  amountToSend: '800000000000000000000',
+  topUp: true, //use this for adding funds to already funded wallets (account will not be checked if it has funds or not)
+  maxBalance: JSBI.BigInt('3000000000000000000000') //in case of top up, maximum balance
 };
-const folder = 'wallets-ebt';
-const batch = 'pa6';
+const folder = 'wallets-deora';
+const batch = 'booth2';
 
 
 //use this to debug CONFIG
@@ -50,7 +51,7 @@ async function main() {
   for(let i = 0; i < accounts.length; i++) {
     console.log(i, 'Dispensing', CONFIG.amountToSend, 'tokens to', accounts[i]);
     balance = await getBalance(accounts[i], CONFIG.tokenColor, rpc);
-    if (!CONFIG.topUp && String(balance) !== '0') {
+    if ((!CONFIG.topUp && String(balance) !== '0') || (CONFIG.topUp && JSBI.GE(balance, CONFIG.maxBalance))) {
         console.log('   Address already funded(', String(balance), '). Skipping.');
         continue;
     }

@@ -2,7 +2,7 @@ var Web3 = require('web3')
 var qr = require('qr-image')
 let base64url = require('base64url')
 
-const URL = "https://sundai.io"
+const URL = "https://volt.deora.earth"
 const COMPRESS = true
 const AUTOPRINT = false
 const MINEFOR = false//"feeddeadbeef"
@@ -45,7 +45,7 @@ public.pipe(require('fs').createWriteStream('public.svg'));
 
 console.log(publicAddress)
 var fs = require('fs')
-fs.readFile("templatesundai.html", 'utf8', (err,data) => {
+fs.readFile("templatedeora.html", 'utf8', (err,data) => {
   if (err) {
     return console.log(err);
   }
